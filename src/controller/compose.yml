@@ -1,0 +1,36 @@
+services:
+
+  redis:
+    image: redis:alpine
+    ports:
+      - 6379:6379
+
+  api_n8n:
+
+    build:
+      context: ../..
+      dockerfile: src/controller/dockerfile.api
+
+    depends_on:
+      - redis
+    env_file:
+      - ../config/.env
+    ports:
+      - 8000:8000
+ 
+  n8n:
+    build:
+      context: ../..
+      dockerfile: src/controller/dockerfile.n8n
+    depends_on:
+      - api_n8n
+      - redis
+
+    ports:
+      - 5678:5678
+
+
+
+    
+    
+  

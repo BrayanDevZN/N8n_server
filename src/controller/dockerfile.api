@@ -1,0 +1,9 @@
+FROM redis:alpine
+FROM python:3.14-slim
+WORKDIR /app
+COPY src/controller/requirements.txt .
+RUN pip install -r requirements.txt
+COPY src/ /app/src
+VOLUME [ "/app/src/storage" ]
+EXPOSE 8000
+CMD ["python", "-m", "uvicorn", "src.app.main:app", "--port", "8000", "--host", "0.0.0.0"]

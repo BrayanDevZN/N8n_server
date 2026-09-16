@@ -6,7 +6,7 @@ class BlockControl:
 
     def __init__(self)-> None:
 
-        self.BASE_DIR = Path(__name__).resolve().parent / "block.json"
+        self.BASE_DIR = Path(__file__).resolve().parent / "block.json"
 
 
     def _exists(self) -> None:

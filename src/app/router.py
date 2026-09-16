@@ -1,50 +1,21 @@
 from fastapi.responses import RedirectResponse, JSONResponse
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Response
 from src.config.settings import ENVIRONMENT
+import requests
+router = APIRouter(prefix="/auth", tags=["auth"])
 
-router = APIRouter(prefix=ENVIRONMENT["path"], tags=[ENVIRONMENT["path"]])
-
-url = ENVIRONMENT["url"]
-
-@router.post("/")
-async def redirect_post():
-
-    return RedirectResponse(
-        url=url,
-        status_code=307
-    )
+url = "http://n8n:5678"
 
 
-@router.get("/")
+@router.api_route("/", methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"])
 async def redirect_get():
 
-    return RedirectResponse(
-        url=url,
-        status_code=307
+    return Response(
+        status_code=200
     )
 
 
-@router.patch("/")
-async def redirect_patch():
-
-    return RedirectResponse(
-        url=url,
-        status_code=307
-    )
 
 
-@router.put("/")
-async def redirect_put():
 
-    return RedirectResponse(
-        url=url,
-        status_code=307
-    )
-
-@router.delete("/")
-async def redirect_delete():
-
-    return RedirectResponse(
-        url=url,
-        status_code=307
-    )
+    

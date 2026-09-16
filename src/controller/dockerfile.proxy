@@ -1,0 +1,4 @@
+FROM nginx:alpine
+
+COPY src/controller/proxy.conf /etc/nginx/nginx.conf
+EXPOSE 800

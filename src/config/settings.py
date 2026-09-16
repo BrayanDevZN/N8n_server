@@ -13,7 +13,7 @@ load_dotenv(path) if os.path.exists(path) else load_dotenv()
 
 ENVIRONMENT = {}
 
-ENV_NAME = ["origin", "rate_limit", "global_rate_limit", "environment", "block", "block_limit", "path", "url"]
+ENV_NAME = ["origin", "rate_limit", "global_rate_limit", "environment", "block", "block_limit"]
 OPTIONAL = ["block", "block_limit"]
 
 for name in ENV_NAME:

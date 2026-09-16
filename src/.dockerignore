@@ -1,0 +1,3 @@
+storage/block.json
+config/.env
+*.__pycache__/

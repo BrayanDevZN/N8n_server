@@ -1,0 +1,38 @@
+name: docker build
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
+
+
+jobs:
+
+    build:
+
+        runs-on: ubuntu-latest
+
+        environment: prod
+
+        env:
+                rate_limit: ${{ secrets.RATE_LIMIT }}
+                global_rate_limit: ${{ secrets.GLOBAL_RATE_LIMIT }}
+                origin: ${{ secrets.ORIGIN }}
+                environment: ${{ secrets.ENVIRONMENT }}
+                block: ${{ secrets.BLOCK }}
+                block_limit: ${{ secrets.BLOCK_LIMIT }}
+
+        steps:
+
+            - uses: actions/checkout@v4
+
+            - name: init docker
+              run: docker compose -f compose.n8n.yml -d --build
+
+            - name: test api
+              run: curl http://localhost:800
+
+            

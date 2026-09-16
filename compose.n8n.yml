@@ -7,10 +7,10 @@ services:
     image: brayandevzn/n8n_server:proxy
 
     depends_on:
-      - api
+      - api_n8n
 
 
-  api:
+  api_n8n:
     image: brayandevzn/n8n_server:api
 
     env_file:

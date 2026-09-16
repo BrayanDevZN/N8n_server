@@ -26,7 +26,7 @@ while True:
 
     except Exception as e:
 
-        if countdown !=0:
+        if countdown ==0:
             logger.error(f"houve um erro na conexão com redis: {e}")
             raise
 

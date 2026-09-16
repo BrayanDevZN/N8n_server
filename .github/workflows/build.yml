@@ -39,8 +39,12 @@ jobs:
                     DATABASE_URL=${{ secrets.DATABASE_URL }}
                     EOF
 
+
             - name: init docker
               run: docker compose -f compose.n8n.yml up -d --build
+            - name: sleep
+              run: sleep 15
+
 
             - name: test api
               run: curl http://localhost:800

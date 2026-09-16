@@ -19,7 +19,7 @@ class RedisControl:
 
                     session.incr(name=name)
 
-                    session.expire(time=60)
+                    session.expire(time=60, name=name)
 
                     session.execute()
 
@@ -31,7 +31,7 @@ class RedisControl:
 
                 logger.warning(f"Alguem ja estava modificando chave {name}!!!")
 
-    async def get(name:str) -> int|None:
+    async def get(self, name:str) -> int|None:
 
 
             try:

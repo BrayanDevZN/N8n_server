@@ -49,7 +49,7 @@ jobs:
                       echo "Health check attempt ${attempt}/12..."
 
                       if docker compose -f compose.n8n.yml exec -T nginx \
-                        wget -q -T 5 -t 1 -O /dev/null http://localhost:800/; then
+                        wget -q -T 5 -t 1 -O /dev/null http://127.0.0.1:800/; then
                         echo "Container is healthy and responding over HTTP."
                         exit 0
                       fi

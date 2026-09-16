@@ -30,7 +30,7 @@ jobs:
             - uses: actions/checkout@v4
 
             - name: init docker
-              run: docker compose -f compose.n8n.yml -d --build
+              run: docker compose -f compose.n8n.yml up -d --build
 
             - name: test api
               run: curl http://localhost:800

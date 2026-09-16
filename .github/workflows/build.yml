@@ -42,11 +42,22 @@ jobs:
 
             - name: init docker
               run: docker compose -f compose.n8n.yml up -d --build
-            - name: sleep
-              run: sleep 15
 
+            - name: Test container readiness
+              run: |
+                    for attempt in {1..12}; do
+                      echo "Health check attempt ${attempt}/12..."
 
-            - name: test api
-              run: curl http://localhost:800
+                      if docker compose -f compose.n8n.yml exec -T nginx \
+                        wget -q -T 5 -t 1 -O /dev/null http://localhost:800/; then
+                        echo "Container is healthy and responding over HTTP."
+                        exit 0
+                      fi
 
-            
+                      sleep 5
+                    done
+
+                    echo "Container did not become ready in time."
+                    docker compose -f compose.n8n.yml ps
+                    docker compose -f compose.n8n.yml logs --no-color
+                    exit 1

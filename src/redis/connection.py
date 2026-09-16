@@ -5,7 +5,7 @@ class ConnectRedisError(Exception):
     pass
 
 logger.info("Criando conexão com redis...")
-client = Redis(
+conn = Redis(
     port=6379, 
     host="redis",
     decode_responses=True
@@ -20,7 +20,7 @@ while True:
     try:
         logger.info("Testando conexão com redis...")
 
-        client.ping()
+        conn.ping()
 
         break
 

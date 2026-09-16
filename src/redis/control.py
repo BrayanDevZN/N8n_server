@@ -1,4 +1,4 @@
-from src.redis.connection import client, logger
+from src.redis.connection import conn, logger
 from redis import WatchError
 
 class RedisControl:
@@ -11,7 +11,7 @@ class RedisControl:
 
                 logger.info(f"Tentando incrementar em {name}...")
 
-                with client.pipeline(transaction=True) as session:
+                with conn.pipeline(transaction=True) as session:
 
                     session.watch(name)
 
@@ -40,7 +40,7 @@ class RedisControl:
 
                 logger.info(f"Tentando ler {name}...")
 
-                with client.pipeline() as session:
+                with conn.pipeline() as session:
 
                     session.get(name=name)
 

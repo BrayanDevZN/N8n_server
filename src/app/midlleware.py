@@ -14,7 +14,7 @@ class Midlleware(BaseHTTPMiddleware):
 
         number = await client.get(name="global_rate_limit")
 
-        if number is not None and int(number) > (limit):
+        if number is not None and int(number) > int(limit):
 
             raise HTTPException(
                 status_code=429,
